@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: django-crud-app
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --no-input"
+    startCommand: "gunicorn CRUD.wsgi:application" # Replace 'CRUD' with your project folder name
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
